@@ -1,0 +1,26 @@
+name: PR
+
+on: pull_request
+
+jobs:
+  git:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Git log
+      run: |
+        git log --oneline
+        git fetch --prune --unshallow
+        git log --oneline
+        echo '===================='
+        echo 'github.event.after = '
+        echo ${{ github.event.after }}
+    - name: set true
+      run: echo '::set-env name=ENV_TEST::true'
+    - name: CI
+      if: ${{ env.ENV_TEST }}
+      run: echo 'ENV_TEST is true'
+    - name: not CI
+      if: ${{ !env.ENV_TEST }}
+      run: echo 'ENV_TEST is false'
