@@ -11,7 +11,7 @@ jobs:
     - name: Git log
       run: |
         git fetch --prune --unshallow
-        if [[ ${{ github.event.after == "" }} ]]; then
+        if [[ ${{ github.event.after == Null }} ]]; then
           echo 'without github.event.after'
           MESSAGE=`git log --pretty=format:%s -n2 | tail -n1`
         else
