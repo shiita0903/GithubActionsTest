@@ -13,7 +13,7 @@ jobs:
         git fetch --prune --unshallow
         MESSAGE=`git log --pretty=format:%s -n2 | tail -n1`
         SKIP_CI=`contains($MESSAGE, '[skip ci]')`
-        echo ""::set-env name=SKIP_CI::$SKIP_CI"
+        echo "::set-env name=SKIP_CI::$SKIP_CI"
 
   skip-ci:
     if: ${{ env.SKIP_CI }}
